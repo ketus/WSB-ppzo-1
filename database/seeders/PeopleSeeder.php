@@ -2,22 +2,27 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class PeopleSeeder extends Seeder
 {
-    public function run(): void
+    public function run(Faker $faker)
     {
-      $faker = Faker::create();
       $numberOfPeopleSeed = 200;
 
       for ($i = 0; $i < $numberOfPeopleSeed; $i++) {
-          \DB::table('people')->insert([
-              'name' => $faker->name,
-              'email' => $faker->unique()->safeEmail,
-              'created_at' => now(),
-              'updated_at' => now(),
+          DB::table('people')->insert([
+              'first_name' =>   $faker->firstName,
+              'last_name' =>    $faker->lastName,
+              'email' =>        $faker->unique()->safeEmail,
+              'phone' =>        $faker->phoneNumber,
+              'street' =>       $faker->streetName,
+              'city' =>         $faker->city,
+              'country' =>      $faker->country,
+              'created_at' =>   now(),
+              'updated_at' =>   now(),
           ]);
       }
     }

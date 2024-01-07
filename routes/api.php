@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\People;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PeopleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(PeopleController::class)->group(function () {    
+    Route::get(   '/oleksa/54521/people', 'index');
+    Route::get(   '/oleksa/54521/people/{person}', 'getPerson');
+    Route::post(  '/oleksa/54521/people', 'create');
+    Route::patch( '/oleksa/54521/people/{person}', 'updatePerson');
+    Route::delete('/oleksa/54521/people/{person}', 'destroyPerson');
+    Route::fallback("fallback");
 });
